@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ImageGallery } from "@/components/ImageGallery";
@@ -17,10 +18,17 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
-  return { title: product?.title || "Ürün" };
+  if (!product) {
+    return { title: "Ürün" };
+  }
+  return {
+    title: product.title,
+    alternates: { canonical: `/urunler/${slug}` },
+    openGraph: { title: product.title, url: `/urunler/${slug}` },
+  };
 }
 
 export default async function ProductDetailPage({
