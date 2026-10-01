@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
-import { getAllProductSlugs, getAllWorkshopSlugs } from "@/lib/firestore";
+import { getPublishedProducts, getPublishedWorkshops } from "@/lib/firestore";
 import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [productSlugs, workshopSlugs] = await Promise.all([
-    getAllProductSlugs(),
-    getAllWorkshopSlugs(),
+  const [products, workshops] = await Promise.all([
+    getPublishedProducts(),
+    getPublishedWorkshops(),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -18,13 +18,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/iletisim`, priority: 0.6 },
   ];
 
-  const productRoutes: MetadataRoute.Sitemap = productSlugs.map((slug) => ({
-    url: `${SITE_URL}/urunler/${slug}`,
+  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+    url: `${SITE_URL}/urunler/${product.slug}`,
+    lastModified: product.updatedAt,
     priority: 0.5,
   }));
 
-  const workshopRoutes: MetadataRoute.Sitemap = workshopSlugs.map((slug) => ({
-    url: `${SITE_URL}/atolyeler/${slug}`,
+  const workshopRoutes: MetadataRoute.Sitemap = workshops.map((workshop) => ({
+    url: `${SITE_URL}/atolyeler/${workshop.slug}`,
+    lastModified: workshop.updatedAt,
     priority: 0.5,
   }));
 

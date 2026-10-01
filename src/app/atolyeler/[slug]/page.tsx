@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ImageGallery } from "@/components/ImageGallery";
@@ -26,10 +27,17 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const workshop = await getWorkshop(slug);
-  return { title: workshop?.title || "Atölye" };
+  if (!workshop) {
+    return { title: "Atölye" };
+  }
+  return {
+    title: workshop.title,
+    alternates: { canonical: `/atolyeler/${slug}` },
+    openGraph: { title: workshop.title, url: `/atolyeler/${slug}` },
+  };
 }
 
 export default async function WorkshopDetailPage({
