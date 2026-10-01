@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import { AnalyticsInit } from "@/components/AnalyticsInit";
 import { JsonLd } from "@/components/JsonLd";
 import { getSeoSettings } from "@/lib/firestore";
 import { SITE_URL } from "@/lib/site";
-
-const display = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["500", "600", "700"],
-});
-
-const sans = Manrope({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700", "800"],
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getSeoSettings();
@@ -54,7 +41,7 @@ export default async function RootLayout({
 
   return (
     <html lang="tr">
-      <body className={`${display.variable} ${sans.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <AnalyticsInit />
         <JsonLd
           data={{
