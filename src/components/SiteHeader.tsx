@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { BrandSettings } from "@/lib/site";
 
 const links = [
   { href: "/atolyeler", label: "Atölyeler" },
@@ -8,13 +9,13 @@ const links = [
   { href: "/iletisim", label: "İletişim" },
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ brand }: { brand: BrandSettings }) {
   return (
     <header className="absolute inset-x-0 top-0 z-40">
       <div className="container-lilyum flex items-center justify-between gap-4 py-5">
         <Link href="/" className="group flex items-center gap-3">
           <Image
-            src="/images/logo-mark.png"
+            src={brand.logoMark}
             alt="Lilyum"
             width={48}
             height={48}

@@ -51,8 +51,6 @@ export default async function RootLayout({
             url: SITE_URL,
             logo: seo.ogImage,
             description: seo.siteDescription,
-            email: "info@lilyum.com",
-            sameAs: ["https://www.instagram.com/lilyumbaskiatolyesi"],
           }}
         />
         {children}

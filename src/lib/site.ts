@@ -1,5 +1,23 @@
 export const SITE_URL = "https://lilyumbaskiatolyesi.com";
 
+export type BrandSettings = {
+  logo: string;
+  logoMark: string;
+  favicon: string;
+  email: string;
+  instagramLabel: string;
+  instagramUrl: string;
+};
+
+export const DEFAULT_BRAND_SETTINGS: BrandSettings = {
+  logo: "/images/logo.png",
+  logoMark: "/images/logo-mark.png",
+  favicon: "/favicon.ico",
+  email: "info@lilyum.com",
+  instagramLabel: "@lilyumbaskiatolyesi",
+  instagramUrl: "https://www.instagram.com/lilyumbaskiatolyesi/",
+};
+
 export type SeoPageKey = "home" | "urunler" | "atolyeler" | "ozelTasarim" | "iletisim";
 
 export type SeoPageSettings = {

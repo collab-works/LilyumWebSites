@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BrandImage } from "@/components/BrandImage";
 import Link from "next/link";
 import { ProductCard, WorkshopCard } from "@/components/Cards";
 import { SiteShell } from "@/components/SiteShell";
@@ -58,14 +59,7 @@ export default async function HomePage() {
           <div className="relative mx-auto w-full max-w-lg animate-float lg:max-w-none">
             <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-gold/30 via-coral/20 to-transparent blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/50 p-6 shadow-soft backdrop-blur-sm sm:p-8">
-              <Image
-                src="/images/logo.png"
-                alt="Lilyum Baskı Atölyesi logosu"
-                width={900}
-                height={900}
-                priority
-                className="h-auto w-full object-contain"
-              />
+              <BrandImage />
             </div>
           </div>
         </div>

@@ -1,14 +1,34 @@
+"use client";
+
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { getBrandSettings } from "@/lib/firestore";
+import { DEFAULT_BRAND_SETTINGS } from "@/lib/site";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 
 export function SiteShell({ children }: { children: ReactNode }) {
+  const [brand, setBrand] = useState(DEFAULT_BRAND_SETTINGS);
+
+  useEffect(() => {
+    getBrandSettings().then(setBrand).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    let icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (!icon) {
+      icon = document.createElement("link");
+      icon.rel = "icon";
+      document.head.appendChild(icon);
+    }
+    icon.href = brand.favicon;
+  }, [brand.favicon]);
+
   return (
     <div className="min-h-screen bg-cream">
-      <SiteHeader />
+      <SiteHeader brand={brand} />
       <main>{children}</main>
-      <SiteFooter />
+      <SiteFooter brand={brand} />
     </div>
   );
 }

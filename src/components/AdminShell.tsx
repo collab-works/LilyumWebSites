@@ -11,6 +11,7 @@ const links = [
   { href: "/lilyum/atolyeler", label: "Atölyeler" },
   { href: "/lilyum/mesajlar", label: "Mesajlar" },
   { href: "/lilyum/seo", label: "SEO" },
+  { href: "/lilyum/gorunum", label: "Görünüm ve iletişim" },
 ];
 
 export function AdminShell({ children }: { children: ReactNode }) {

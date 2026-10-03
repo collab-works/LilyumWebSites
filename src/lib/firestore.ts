@@ -14,7 +14,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import { DEFAULT_SEO_SETTINGS, type SeoSettings } from "./site";
+import { DEFAULT_BRAND_SETTINGS, DEFAULT_SEO_SETTINGS, type BrandSettings, type SeoSettings } from "./site";
 import { serializeImages, slugify } from "./utils";
 
 export type Product = {
@@ -334,4 +334,13 @@ export async function getSeoSettings(): Promise<SeoSettings> {
 
 export async function updateSeoSettings(data: SeoSettings) {
   await setDoc(doc(db, "siteSettings", "seo"), data, { merge: true });
+}
+
+export async function getBrandSettings(): Promise<BrandSettings> {
+  const snap = await getDoc(doc(db, "siteSettings", "brand"));
+  return { ...DEFAULT_BRAND_SETTINGS, ...(snap.exists() ? snap.data() : {}) };
+}
+
+export async function updateBrandSettings(data: BrandSettings) {
+  await setDoc(doc(db, "siteSettings", "brand"), data);
 }

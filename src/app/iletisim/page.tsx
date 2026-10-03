@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { ContactLinks } from "@/components/ContactLinks";
 import { PageHero, SiteShell } from "@/components/SiteShell";
 import { getSeoSettings } from "@/lib/firestore";
 
@@ -30,8 +31,7 @@ export default function ContactPage() {
             </p>
             <h2 className="mt-3 font-display text-2xl text-navy">Hızlı iletişim</h2>
             <div className="mt-5 space-y-2 text-sm text-navy/70">
-              <p>E-posta: info@lilyum.com</p>
-              <p>Instagram: @lilyumbaskiatolyesi</p>
+              <ContactLinks />
               <p>Okul atölyesi veya özel ürün için formu doldurmanız yeterli.</p>
             </div>
           </div>
