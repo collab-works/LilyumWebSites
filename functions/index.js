@@ -13,6 +13,10 @@ function field(value, maxLength) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 exports.notifyContactMessage = onDocumentCreated(
   {
     document: "contactMessages/{messageId}",
@@ -51,7 +55,7 @@ exports.notifyContactMessage = onDocumentCreated(
         to: recipients,
         subject: `Yeni iletişim mesajı: ${subject || "Konusuz"}`,
         text,
-        ...(email && { reply_to: email }),
+        ...(isValidEmail(email) && { reply_to: email }),
       }),
     });
 
