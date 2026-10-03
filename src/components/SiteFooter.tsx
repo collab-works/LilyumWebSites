@@ -55,7 +55,14 @@ export function SiteFooter({ brand }: { brand: BrandSettings }) {
           </p>
           <div className="mt-4 space-y-2 text-sm text-cream/80">
             <a href={`mailto:${brand.email}`} className="block hover:text-white">{brand.email}</a>
-            <a href={brand.instagramUrl} target="_blank" rel="noopener noreferrer" className="block hover:text-white">Instagram: {brand.instagramLabel}</a>
+            <a href={brand.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label={`Instagram: ${brand.instagramLabel}`} className="inline-flex items-center gap-2 hover:text-white">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none" />
+              </svg>
+              <span>{brand.instagramLabel}</span>
+            </a>
           </div>
         </div>
       </div>
