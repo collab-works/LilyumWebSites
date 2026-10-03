@@ -1,0 +1,8 @@
+{
+  "name": "lilyum-functions",
+  "private": true,
+  "engines": { "node": "20" },
+  "main": "index.js",
+  "scripts": { "check": "node --check index.js" },
+  "dependencies": { "firebase-functions": "^6.3.2" }
+}

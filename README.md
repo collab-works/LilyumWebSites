@@ -39,3 +39,16 @@ npm run build
 - İletişim formu mesajları
 
 Not: Ürün/atölye içerikleri build anında (statik export sırasında) Firestore'dan çekilir. Admin panelden yapılan bir değişikliğin canlı sitede görünmesi için ya "Değişiklikleri Yayınla" butonuyla GitHub Actions'ı elle tetiklemeniz, ya da otomatik zamanlanmış rebuild'i (6 saatte bir) beklemeniz gerekir.
+
+## İletişim formu e-posta bildirimleri
+
+Form mesajları Firestore'daki `contactMessages` koleksiyonuna kaydedilir. `functions/index.js` içindeki `notifyContactMessage` işlevi yeni kayıtları üç adrese Resend üzerinden e-posta olarak yollar. Siteyi GitHub Pages'e dağıtmak bu işlevi dağıtmaz; Firebase Functions ayrıca kurulmalıdır.
+
+1. Firebase projesinde Blaze planını açın. Resend'de gönderen alan adınızı doğrulayın ve bir API anahtarı oluşturun.
+2. Proje kökünde `firebase login` ve `firebase use <firebase-project-id>` komutlarıyla doğru projeyi seçin.
+3. `cd functions && npm install` komutunu çalıştırın.
+4. Proje kökünde `firebase functions:secrets:set RESEND_API_KEY` komutuyla API anahtarını kaydedin.
+5. `firebase deploy --only functions:notifyContactMessage` komutunu çalıştırın. CLI `CONTACT_MAIL_FROM` değerini istediğinde doğrulanmış alan adını kullanan bir gönderici girin (ör. `Lilyum <bildirim@alanadiniz.com>`).
+6. İletişim formundan bir deneme mesajı gönderip üç posta kutusunu kontrol edin. Gönderim hatalarını Firebase Console > Functions > Logs bölümünde inceleyin.
+
+`RESEND_API_KEY` değerini GitHub Pages secrets veya `NEXT_PUBLIC_` değişkenlerine eklemeyin; yalnızca Firebase Functions secret olarak saklayın.

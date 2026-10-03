@@ -12,7 +12,8 @@ export function ContactForm() {
     setStatus("loading");
     setError("");
 
-    const form = new FormData(e.currentTarget);
+    const formElement = e.currentTarget;
+    const form = new FormData(formElement);
     const payload = {
       name: String(form.get("name") || ""),
       email: String(form.get("email") || ""),
@@ -24,7 +25,7 @@ export function ContactForm() {
     try {
       await createMessage(payload);
       setStatus("ok");
-      e.currentTarget.reset();
+      formElement.reset();
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Bir hata oluştu");

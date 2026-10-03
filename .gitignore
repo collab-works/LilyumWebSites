@@ -49,3 +49,6 @@ serviceAccountKey.json
 
 # temp
 _docx_extract.txt
+
+# firebase functions dependencies
+functions/node_modules/
