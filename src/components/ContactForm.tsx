@@ -27,8 +27,9 @@ export function ContactForm() {
       setStatus("ok");
       formElement.reset();
     } catch (err) {
+      console.error("İletişim formu gönderilemedi:", err);
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Bir hata oluştu");
+      setError("Mesajınız gönderilemedi. Lütfen daha sonra tekrar deneyin.");
     }
   }
 
